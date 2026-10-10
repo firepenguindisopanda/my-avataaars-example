@@ -1,16 +1,27 @@
 /* The four backdrops behind the page (see SceneBackdrop.tsx and scenes.ts).
-   Each scene also sets the accent the buttons, links and focus rings use. */
+   Each scene also sets the accent the buttons, links and focus rings use, and
+   the colour of the title and lead set straight on its sky. */
 
 .scene { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; animation: scene-in 0.6s ease both; }
+/* The title is set straight on the sky. --clear is how far down it can reach
+   (further on a phone, where it wraps); a sky that changes tone keeps its
+   title colour's tone at least that far, and the sun stays below it, however
+   short the window. */
+.scene { --clear: 300px; }
+@media (max-width: 600px) { .scene { --clear: 470px; } }
 @keyframes scene-in { from { opacity: 0; } to { opacity: 1; } }
 
-.app-shell[data-scene='lagoon'] { --accent: #0b6e84; --bg: #a9e9f7; }
-.app-shell[data-scene='sunset'] { --accent: #b4235a; --bg: #5b2a86; --glass: rgba(255, 255, 255, 0.84); }
-.app-shell[data-scene='carnival'] { --accent: #6d28d9; --bg: #160f36; --glass: rgba(255, 255, 255, 0.86); }
-.app-shell[data-scene='aurora'] { --accent: #4338ca; --bg: #f3f5ff; }
+.app-shell[data-scene='lagoon'] { --accent: #0b6e84; --bg: #a9e9f7; --on-scene: #0b2f38; --on-scene-muted: #1f4d57; }
+.app-shell[data-scene='sunset'] { --accent: #b4235a; --bg: #5b2a86; --on-scene: #ffffff; --on-scene-muted: #f3e3ff; }
+.app-shell[data-scene='carnival'] { --accent: #6d28d9; --bg: #160f36; --on-scene: #ffffff; --on-scene-muted: #ddd6fe; }
+.app-shell[data-scene='aurora'] { --accent: #4338ca; --bg: #f3f5ff; --on-scene: #1d2330; --on-scene-muted: #374151; }
 
 /* Lagoon: sky, sun, drifting clouds and three layers of waves. */
-.scene-lagoon { background: linear-gradient(180deg, #e3f8ff 0%, #b3ecf8 28%, #6fd5e6 52%, #27abc3 74%, #0b6e84 100%); }
+.scene-lagoon {
+  background: linear-gradient(180deg, #e3f8ff 0,
+    #b3ecf8 max(28%, calc(var(--clear) * 0.55)), #6fd5e6 max(52%, var(--clear)),
+    #27abc3 max(74%, calc(var(--clear) + 120px)), #0b6e84 max(100%, calc(var(--clear) + 200px)));
+}
 .sun-glow {
   position: absolute; top: -14vmax; right: -10vmax; width: 52vmax; height: 52vmax; border-radius: 50%;
   background: radial-gradient(circle, rgba(255, 249, 204, 0.95) 0%, rgba(255, 236, 150, 0.45) 34%, transparent 66%);
@@ -32,12 +43,19 @@
 .wave-front path { fill: rgba(255, 255, 255, 0.34); }
 @keyframes wave-slide { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-/* Sunset: dusk sky, a striped sun sinking into the sea, a glint, two palms. */
+/* Sunset: dusk sky, a striped sun sinking into the sea, a glint, two palms.
+   On a short window the sun sinks further into the sea rather than rise
+   behind the title. */
 .scene-sunset {
-  background: linear-gradient(180deg, #2b1d5c 0%, #5b2a86 22%, #b23a8a 44%, #f2647a 60%, #ff9a62 70%, #ffc477 76%);
+  background: linear-gradient(180deg, #2b1d5c 0,
+    #4a2580 max(30%, calc(var(--clear) * 0.6)), #8e3289 max(50%, var(--clear)),
+    #e0577c max(64%, calc(var(--clear) + 80px)), #ff9a62 max(72%, calc(var(--clear) + 130px)),
+    #ffc477 max(78%, calc(var(--clear) + 170px)));
 }
 .sunset-sun {
-  position: absolute; left: 50%; bottom: 14%; width: min(46vw, 440px); aspect-ratio: 1; border-radius: 50%;
+  --sun: min(46vw, 440px, 34vh);
+  position: absolute; left: 50%; bottom: min(14%, calc(100% - var(--clear) - var(--sun)));
+  width: var(--sun); aspect-ratio: 1; border-radius: 50%;
   transform: translateX(-50%);
   background: linear-gradient(180deg, #ffe58a 0%, #ffb36b 48%, #ff6f7d 100%);
   box-shadow: 0 0 140px 40px rgba(255, 140, 100, 0.45);

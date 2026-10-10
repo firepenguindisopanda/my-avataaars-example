@@ -14,7 +14,7 @@ export default function App() {
       <SceneBackdrop scene={scene} />
 
       <div className='app'>
-        <header className='card hero'>
+        <header className='hero'>
           <div className='hero-text'>
             <p className='eyebrow'>Caribbean collection, new in 2.6.0</p>
             <h1>Avataaars Studio</h1>

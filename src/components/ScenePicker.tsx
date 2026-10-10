@@ -9,19 +9,21 @@ export default function ScenePicker() {
   return (
     <fieldset className='scene-picker'>
       <legend>Scene</legend>
-      {SCENES.map(({ id, label, blurb }) => (
-        <label key={id} className={`scene-option${scene === id ? ' active' : ''}`} title={blurb}>
-          <input
-            type='radio'
-            name='scene'
-            value={id}
-            checked={scene === id}
-            onChange={() => setScene(id)}
-          />
-          <span className={`scene-swatch swatch-${id}`} aria-hidden='true' />
-          <span>{label}</span>
-        </label>
-      ))}
+      <div className='scene-options'>
+        {SCENES.map(({ id, label, blurb }) => (
+          <label key={id} className={`scene-option${scene === id ? ' active' : ''}`} title={blurb}>
+            <input
+              type='radio'
+              name='scene'
+              value={id}
+              checked={scene === id}
+              onChange={() => setScene(id)}
+            />
+            <span className={`scene-swatch swatch-${id}`} aria-hidden='true' />
+            <span>{label}</span>
+          </label>
+        ))}
+      </div>
     </fieldset>
   )
 }
