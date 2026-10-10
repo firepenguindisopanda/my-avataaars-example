@@ -3,7 +3,8 @@
 A small React + Vite + TypeScript app that shows off
 `@firepenguindisopanda/avataaars`, including the new Trinidad & Tobago and
 Jamaica items (flag shirts, shirt graphics, flag sunglasses, `JamaicaTam` and
-`CarnivalHeadpiece`), shown in the "Caribbean collection" section.
+`CarnivalHeadpiece`, and since 2.7.0 the `Anansi`, `Cocrico` and `Ackee`
+graphics and the `CarnivalMask`), shown in the "Caribbean collection" section.
 
 ## Run it
 
@@ -12,12 +13,12 @@ npm install
 npm run dev
 ```
 
-The package is installed from npm (`^2.6.0`, the first release with the
+The package is installed from npm (`^2.7.0`, the release with the whole
 Caribbean collection), so the project builds on its own, e.g. on Cloudflare.
 
 To try unpublished changes to the package, link the local checkout instead
 (`npm install ../avataaars`, after `npm run build` inside `../avataaars`), and
-put `^2.6.0` back before deploying. `vite.config.ts` dedupes `react`/`react-dom`
+put `^2.7.0` back before deploying. `vite.config.ts` dedupes `react`/`react-dom`
 so a linked package and the app share one copy of React.
 
 ## Deploy

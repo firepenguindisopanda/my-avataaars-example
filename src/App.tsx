@@ -16,7 +16,7 @@ export default function App() {
       <div className='app'>
         <header className='hero'>
           <div className='hero-text'>
-            <p className='eyebrow'>Caribbean collection, new in 2.6.0</p>
+            <p className='eyebrow'>Caribbean collection, four new pieces in 2.7.0</p>
             <h1>Avataaars Studio</h1>
             <p className='hero-lead'>
               Build an avatar, try on the Trinidad and Tobago and Jamaica looks,

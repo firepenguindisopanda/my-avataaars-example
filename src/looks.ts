@@ -21,6 +21,12 @@ export const COLLECTION: { country: string; looks: Look[] }[] = [
       { id: 'tt-steelpan', label: 'Steelpan tee', preset: { clotheType: 'GraphicShirt', graphicType: 'Steelpan' } },
       { id: 'tt-ibis', label: 'Scarlet ibis tee', preset: { clotheType: 'GraphicShirt', graphicType: 'ScarletIbis' } },
       { id: 'tt-badge', label: 'Flag badge tee', preset: { clotheType: 'GraphicShirt', graphicType: 'TrinidadAndTobagoBadge' } },
+      { id: 'tt-cocrico', label: 'Cocrico tee', preset: { clotheType: 'GraphicShirt', graphicType: 'Cocrico' } },
+      {
+        id: 'tt-mas',
+        label: 'Carnival mask',
+        preset: { topType: 'CarnivalHeadpiece', accessoriesType: 'CarnivalMask', clotheType: 'TrinidadAndTobagoShirt' },
+      },
     ],
   },
   {
@@ -34,6 +40,8 @@ export const COLLECTION: { country: string; looks: Look[] }[] = [
       { id: 'ja-shirt', label: 'Flag shirt', preset: { clotheType: 'JamaicaShirt' } },
       { id: 'ja-doctorbird', label: 'Doctor bird tee', preset: { clotheType: 'GraphicShirt', graphicType: 'DoctorBird' } },
       { id: 'ja-badge', label: 'Flag badge tee', preset: { clotheType: 'GraphicShirt', graphicType: 'JamaicaBadge' } },
+      { id: 'ja-ackee', label: 'Ackee tee', preset: { clotheType: 'GraphicShirt', graphicType: 'Ackee' } },
+      { id: 'ja-anansi', label: 'Anansi tee', preset: { clotheType: 'GraphicShirt', graphicType: 'Anansi' } },
     ],
   },
 ]
