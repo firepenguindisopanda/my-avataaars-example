@@ -7,6 +7,7 @@ import {
   getAvatarConfigFromHash,
 } from '@firepenguindisopanda/avataaars'
 import { withLook, type AvatarConfig } from '../looks'
+import { DEFAULT_SCENE, isSceneId, type SceneId } from '../scenes'
 
 export interface SavedAvatar {
   id: string
@@ -18,6 +19,7 @@ interface AvatarState {
   config: AvatarConfig
   activeLookId: string | null
   saved: SavedAvatar[]
+  scene: SceneId
   setOption: (key: string, value: string) => void
   toggleLook: (id: string) => void
   randomize: () => void
@@ -26,6 +28,7 @@ interface AvatarState {
   save: (name: string) => void
   load: (id: string) => void
   remove: (id: string) => void
+  setScene: (scene: SceneId) => void
 }
 
 export const useAvatarStore = create<AvatarState>()(
@@ -34,6 +37,7 @@ export const useAvatarStore = create<AvatarState>()(
       config: { ...DEFAULT_AVATAR_PROPS },
       activeLookId: null,
       saved: [],
+      scene: DEFAULT_SCENE,
 
       setOption: (key, value) =>
         set((state) => ({
@@ -65,6 +69,8 @@ export const useAvatarStore = create<AvatarState>()(
 
       remove: (id) =>
         set((state) => ({ saved: state.saved.filter((a) => a.id !== id) })),
+
+      setScene: (scene) => set({ scene }),
     }),
     {
       name: 'avataaars-studio',
@@ -72,7 +78,13 @@ export const useAvatarStore = create<AvatarState>()(
         config: state.config,
         activeLookId: state.activeLookId,
         saved: state.saved,
+        scene: state.scene,
       }),
+      // A stored scene that no longer exists falls back to the default.
+      merge: (persisted, current) => {
+        const stored = (persisted ?? {}) as Partial<AvatarState>
+        return { ...current, ...stored, scene: isSceneId(stored.scene) ? stored.scene : current.scene }
+      },
     }
   )
 )

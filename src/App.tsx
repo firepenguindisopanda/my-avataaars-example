@@ -2,28 +2,43 @@ import AvatarPreview from './components/AvatarPreview'
 import CaribbeanCollection from './components/CaribbeanCollection'
 import OptionEditor from './components/OptionEditor'
 import SavedGallery from './components/SavedGallery'
+import SceneBackdrop from './components/SceneBackdrop'
+import ScenePicker from './components/ScenePicker'
+import { useAvatarStore } from './store/avatarStore'
 
 export default function App() {
-  return (
-    <div className='app'>
-      <header className='app-header'>
-        <h1>Avataaars Studio</h1>
-        <p>
-          Example app for <code>@firepenguindisopanda/avataaars</code>, with
-          avatar state managed by a Zustand store (persisted to localStorage).
-        </p>
-      </header>
+  const scene = useAvatarStore((s) => s.scene)
 
-      <main className='layout'>
-        <div className='column'>
-          <AvatarPreview />
-          <CaribbeanCollection />
-        </div>
-        <div className='column'>
-          <OptionEditor />
-          <SavedGallery />
-        </div>
-      </main>
+  return (
+    <div className='app-shell' data-scene={scene}>
+      <SceneBackdrop scene={scene} />
+
+      <div className='app'>
+        <header className='card hero'>
+          <div className='hero-text'>
+            <p className='eyebrow'>Caribbean collection, new in 2.6.0</p>
+            <h1>Avataaars Studio</h1>
+            <p className='hero-lead'>
+              Build an avatar, try on the Trinidad and Tobago and Jamaica looks,
+              and save the ones you like. Made with{' '}
+              <code>@firepenguindisopanda/avataaars</code>, with state kept in a
+              Zustand store in your browser.
+            </p>
+          </div>
+          <ScenePicker />
+        </header>
+
+        <main className='layout'>
+          <div className='column'>
+            <AvatarPreview />
+            <CaribbeanCollection />
+          </div>
+          <div className='column'>
+            <OptionEditor />
+            <SavedGallery />
+          </div>
+        </main>
+      </div>
     </div>
   )
 }
